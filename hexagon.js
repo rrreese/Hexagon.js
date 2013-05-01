@@ -72,7 +72,6 @@ HexagonGrid.prototype.drawHex = function(x0, y0, fillColor, debugText) {
     this.context.closePath();
     this.context.stroke();
 
-
     if (debugText) {
         this.context.font = "8px";
         this.context.fillStyle = "#000";
@@ -80,7 +79,7 @@ HexagonGrid.prototype.drawHex = function(x0, y0, fillColor, debugText) {
     }
 };
 
-//Uses a grid overlay algorithm to detemrine hexagon location
+//Uses a grid overlay algorithm to determine hexagon location
 //Left edge of grid has a test to acuratly determin correct hex
 HexagonGrid.prototype.getSelectedTile = function(mouseX, mouseY) {
     mouseX -= 6;
@@ -177,6 +176,6 @@ HexagonGrid.prototype.clickEvent = function (e) {
         var drawy = tile.column % 2 == 0 ? (tile.row * this.height) + this.canvasOriginY + 6 : (tile.row * this.height) + this.canvasOriginY + 6 + (this.height / 2);
         var drawx = (tile.column * this.side) + this.canvasOriginX;
 
-        this.drawHex(drawx, drawy - 6, "rgba(120,110,10,0.3)", "");
+        this.drawHex(drawx, drawy - 6, "rgba(110,110,70,0.3)", "");
     } 
 };
