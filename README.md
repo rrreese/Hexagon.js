@@ -22,6 +22,6 @@ Simply use the following html:
     </body>
 
 
-
 Call the HexagonGrid constructor with the id of your canvas and the radius of your hexagons. drawHexGrid takes the number of columns and rows followed by  an offset. Optionally the coordinate system can be displayed.
 
+A hexagon can be drawn at an abitrary point with drawHex(). Additionally there is the helper function drawHexAtColRow() which draws a hexagon at a grid column/row coordinate.
