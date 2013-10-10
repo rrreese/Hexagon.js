@@ -48,10 +48,10 @@ HexagonGrid.prototype.drawHexGrid = function (rows, cols, originX, originY, isDe
 };
 
 HexagonGrid.prototype.drawHexAtColRow = function(column, row, color) {
-    var drawy = column % 2 == 0 ? (row * this.height) + this.canvasOriginY + 6 : (row * this.height) + this.canvasOriginY + 6 + (this.height / 2);
+    var drawy = column % 2 == 0 ? (row * this.height) + this.canvasOriginY + this.canvas.offsetLeft : (row * this.height) + this.canvasOriginY + this.canvas.offsetLeft + (this.height / 2);
     var drawx = (column * this.side) + this.canvasOriginX;
 
-    this.drawHex(drawx, drawy - 6, color, "");
+    this.drawHex(drawx, drawy - this.canvas.offsetLeft, color, "");
 };
 
 HexagonGrid.prototype.drawHex = function(x0, y0, fillColor, debugText) {
@@ -82,8 +82,8 @@ HexagonGrid.prototype.drawHex = function(x0, y0, fillColor, debugText) {
 //Uses a grid overlay algorithm to determine hexagon location
 //Left edge of grid has a test to acuratly determin correct hex
 HexagonGrid.prototype.getSelectedTile = function(mouseX, mouseY) {
-    mouseX -= 6;
-    mouseY -= 7;
+    mouseX -= this.canvas.offsetLeft;
+    mouseY -= this.canvas.offsetTop;
 
     var column = Math.floor((mouseX) / this.side);
     var row = Math.floor(
