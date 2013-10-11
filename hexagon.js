@@ -1,4 +1,4 @@
-﻿// Hex math defined here: http://blog.ruslans.com/2011/02/hexagonal-grid-math.html
+// Hex math defined here: http://blog.ruslans.com/2011/02/hexagonal-grid-math.html
 
 function HexagonGrid(canvasId, radius) {
     this.radius = radius;
@@ -48,10 +48,10 @@ HexagonGrid.prototype.drawHexGrid = function (rows, cols, originX, originY, isDe
 };
 
 HexagonGrid.prototype.drawHexAtColRow = function(column, row, color) {
-    var drawy = column % 2 == 0 ? (row * this.height) + this.canvasOriginY + this.canvas.offsetLeft : (row * this.height) + this.canvasOriginY + this.canvas.offsetLeft + (this.height / 2);
+    var drawy = column % 2 == 0 ? (row * this.height) + this.canvasOriginY : (row * this.height) + this.canvasOriginY + (this.height / 2);
     var drawx = (column * this.side) + this.canvasOriginX;
 
-    this.drawHex(drawx, drawy - this.canvas.offsetLeft, color, "");
+    this.drawHex(drawx, drawy, color, "");
 };
 
 HexagonGrid.prototype.drawHex = function(x0, y0, fillColor, debugText) {
@@ -79,11 +79,28 @@ HexagonGrid.prototype.drawHex = function(x0, y0, fillColor, debugText) {
     }
 };
 
+//Recusivly step up to the body to calculate canvas offset.
+HexagonGrid.prototype.getRelativeCanvasOffset = function() {
+	var x = 0, y = 0;
+	var layoutElement = this.canvas;
+    if (layoutElement.offsetParent) {
+        do {
+            x += layoutElement.offsetLeft;
+            y += layoutElement.offsetTop;
+        } while (layoutElement = layoutElement.offsetParent);
+        
+        return { x: x, y: y };
+    }
+}
+
 //Uses a grid overlay algorithm to determine hexagon location
 //Left edge of grid has a test to acuratly determin correct hex
 HexagonGrid.prototype.getSelectedTile = function(mouseX, mouseY) {
-    mouseX -= this.canvas.offsetLeft;
-    mouseY -= this.canvas.offsetTop;
+
+	var offSet = this.getRelativeCanvasOffset();
+
+    mouseX -= offSet.x;
+    mouseY -= offSet.y;
 
     var column = Math.floor((mouseX) / this.side);
     var row = Math.floor(
