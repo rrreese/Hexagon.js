@@ -1,7 +1,7 @@
 Hexagon.js
 ==========
 
-A JavaScript library for drawing and interacting with hex grids. [Demo](https://rawgithub.com/rrreese/Hexagon.js/master/hexagon.html)
+A JavaScript library for drawing and interacting with hex grids. [Demo and usage](https://robert-reese.squarespace.com/blog/hexagonjs)
 
 Currently Hexagon.js only supports flat topped hexagons (pull requests welcome).
 
